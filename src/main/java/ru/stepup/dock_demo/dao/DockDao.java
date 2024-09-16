@@ -13,7 +13,7 @@ import ru.stepup.dock_demo.entity.Account;
 import java.sql.PreparedStatement;
 import java.util.Objects;
 
-// пуст к swagger: http://localhost:8080/swagger-ui/index.html#
+// путь к swagger: http://localhost:8080/swagger-ui/index.html#
 
 @Component
 public class DockDao {
