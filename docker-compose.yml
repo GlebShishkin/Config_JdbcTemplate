@@ -11,7 +11,7 @@ services:
     environment:
       - DB_USER=postgres
       - DB_PASSWORD=postgres
-      - DB_URL=dbl
+      - DB_URL=dbl  # подставляется в переменную "DB_URL" jdbc:postgresql://${DB_URL:localhost}:5432/bank в application.yml
       - DATABASE_HOST=org.postgresql.Driver
     depends_on:
       - db

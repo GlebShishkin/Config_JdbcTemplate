@@ -10,4 +10,5 @@ import lombok.*;
 public class Account {
     private Integer id;
     private String acc_num;
+    private String name;
 }

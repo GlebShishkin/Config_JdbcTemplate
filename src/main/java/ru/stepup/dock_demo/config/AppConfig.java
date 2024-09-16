@@ -1,5 +1,8 @@
 package ru.stepup.dock_demo.config;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +13,7 @@ import ru.stepup.dock_demo.config.properties.DatabaseProperty;
 
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Configuration
 public class AppConfig {
@@ -41,5 +45,18 @@ public class AppConfig {
     @Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
+    }
+
+    // обращение по адресу: http://localhost:8080/swagger-ui/index.html#
+    @Bean
+    public OpenAPI api() {
+        return new OpenAPI()
+                .servers(
+                        List.of(new Server().url("http://localhost:8080")
+                        )
+                )
+                .info(
+                  new Info().title("Our bank API")
+                );
     }
 }

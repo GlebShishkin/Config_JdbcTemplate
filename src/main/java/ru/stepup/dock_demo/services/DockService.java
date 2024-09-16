@@ -1,9 +1,9 @@
 package ru.stepup.dock_demo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 import ru.stepup.dock_demo.dao.DockDao;
+import ru.stepup.dock_demo.dto.AccountDto;
 import ru.stepup.dock_demo.entity.Account;
 
 @Service
@@ -14,5 +14,9 @@ public class DockService {
 
     public Account getAccount(int id) {
         return dockDao.getAccount(id);
+    }
+
+    public int save (AccountDto accountDto) {
+        return dockDao.save(accountDto);
     }
 }

@@ -1,7 +1,8 @@
 CREATE TABLE account
 (
-    id int8 PRIMARY KEY NOT NULL,
-    acc_num VARCHAR(25) NOT NULL
+    id SERIAL PRIMARY KEY,
+    acc_num VARCHAR(25) NOT NULL,
+    name VARCHAR(100) NOT NULL
 );
 
-insert into account(id, acc_num) values(1, '444555');
+insert into account(acc_num, name) values('444555', 'name1');
