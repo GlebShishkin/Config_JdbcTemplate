@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import ru.stepup.dock_demo.config.properties.DatabaseProperty;
 
 
@@ -16,6 +17,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Configuration
+@EnableWebMvc
 public class AppConfig {
 
     public static final String PROPERTY_PREFIX = "spring.datasource";

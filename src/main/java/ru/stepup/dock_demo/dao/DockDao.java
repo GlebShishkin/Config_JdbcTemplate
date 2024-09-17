@@ -1,6 +1,6 @@
 package ru.stepup.dock_demo.dao;
 
-import io.swagger.v3.oas.annotations.Operation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
 import java.util.Objects;
 
 // путь к swagger: http://localhost:8080/swagger-ui/index.html#
-
+@Slf4j
 @Component
 public class DockDao {
 
@@ -25,22 +25,23 @@ public class DockDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Operation(
-            summary = "получение счета",
-            description = "получает по id счет"
-    )
     public Account getAccount(Integer id) {
         return jdbcTemplate.query("select * from account where id = ?", new Object[]{id}
                         , new BeanPropertyRowMapper<>(Account.class))
                 .stream().findAny().orElse(null);
     }
 
+    // получение id чета по номеру и имени
+    public Integer getAccountId(String acc_num, String name) {
+        log.info("####### acc_num = " + acc_num + "; name = " + name);
+
+        Account account = jdbcTemplate.query("select * from account where acc_num = ? and name = ?", new Object[]{acc_num, name}
+                        , new BeanPropertyRowMapper<>(Account.class))
+                .stream().findAny().orElseThrow(() -> new IllegalArgumentException("Account not found"));
+        return account.getId();
+  }
+
 /* Старый вариант (без лямбда-выражения)
-    // сохранение Account в таблицу
-    @Operation(
-            summary = "сохранение Account в таблицу",
-            description = "получение id нового счета"
-    )
     public int save (AccountDto accountDto) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -59,11 +60,6 @@ public class DockDao {
     }
 */
 
-    // сохранение Account в таблицу
-    @Operation(
-            summary = "сохранение Account в таблицу",
-            description = "получение id нового счета"
-    )
     public int save (AccountDto accountDto) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 

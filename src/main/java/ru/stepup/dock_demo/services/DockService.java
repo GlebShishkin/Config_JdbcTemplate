@@ -16,6 +16,10 @@ public class DockService {
         return dockDao.getAccount(id);
     }
 
+    public Integer getAccountId(String acc_num, String name) {
+        return dockDao.getAccountId(acc_num, name);
+    }
+
     public int save (AccountDto accountDto) {
         return dockDao.save(accountDto);
     }
